@@ -1,3 +1,3 @@
 """A number-guessing game."""
 
-# Put your code here
+name = input("Howdy, what's your name? \n(type in your name) ")
