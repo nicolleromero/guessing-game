@@ -15,28 +15,34 @@ while guess.isdigit() != True:
     print("Nope! You must enter a number between 1 and 100.")
     guess = input("Your guess? ")
 
-guess = int(guess)
 
-while guess > 100 or guess < 1:
-    print("Nope! You must enter a number between 1 and 100.")
-    guess = int(input("Your guess? "))
+# while guess > 100 or guess < 1:
+#     print("Nope! You must enter a number between 1 and 100.")
+#     guess = int(input("Your guess? "))
 
 count += 1
 
 while guess != number:
 
-    while guess > 100 or guess < 1:
+    try:
+        guess = int(guess)
+
+        while guess > 100 or guess < 1:
+            print("Nope! You must enter a number between 1 and 100.")
+            guess = int(input("Your guess? "))
+
+        if guess < number:
+            print("Your guess is too low, try again.")
+            guess = int(input("Your guess? "))
+            count += 1
+
+        if guess > number:
+            print("Your guess is too high, try again.")
+            guess = int(input("Your guess? "))
+            count += 1
+
+    except:
         print("Nope! You must enter a number between 1 and 100.")
-        guess = int(input("Your guess? "))
-
-    if guess < number:
-        print("Your guess is too low, try again.")
-        guess = int(input("Your guess? "))
-        count += 1
-
-    if guess > number:
-        print("Your guess is too high, try again.")
-        guess = int(input("Your guess? "))
-        count += 1
+        guess = input("Your guess? ")
 
 print(f"Well done, {name}! You found my number in {count} tries!")
