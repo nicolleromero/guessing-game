@@ -2,38 +2,48 @@
 
 import random
 
-number = random.randint(1, 101) # target number
-count = 0 # tracks number of guesses
+def play_game():
 
-name = input("Howdy, what's your name? \n(type in your name) ")
+    number = random.randint(1, 101) # target number
+    count = 0 # tracks number of guesses
 
-print(f"{name}, I'm thinking of a number between 1 and 100.\nTry to guess my number.")
+    name = input("Howdy, what's your name? \n(type in your name) ")
+    print(f"{name}, I'm thinking of a number between 1 and 100.\nTry to guess my number.")
 
-guess = input("Your guess? ")
+    guess = input("Your guess? ")
+    count += 1 # count first guess
 
-count += 1 # count first guess
+    count = keep_guessing(guess, number, count)
 
-while guess != number:
+    print(f"Well done, {name}! You found my number in {count} tries!")
 
-    try:
-        guess = int(guess) # convert input to an integer
 
-        while guess > 100 or guess < 1:
+def keep_guessing(guess, number, count):
+
+    while guess != number:
+
+        try:
+            guess = int(guess) # convert input to an integer
+
+            while guess > 100 or guess < 1:
+                print("Nope! You must enter a number between 1 and 100.")
+                guess = int(input("Your guess? "))
+
+            if guess < number:
+                print("Your guess is too low, try again.")
+                guess = int(input("Your guess? "))
+                count += 1
+
+            if guess > number:
+                print("Your guess is too high, try again.")
+                guess = int(input("Your guess? "))
+                count += 1
+
+        except:
             print("Nope! You must enter a number between 1 and 100.")
-            guess = int(input("Your guess? "))
+            guess = input("Your guess? ")
 
-        if guess < number:
-            print("Your guess is too low, try again.")
-            guess = int(input("Your guess? "))
-            count += 1
+    return count
 
-        if guess > number:
-            print("Your guess is too high, try again.")
-            guess = int(input("Your guess? "))
-            count += 1
 
-    except:
-        print("Nope! You must enter a number between 1 and 100.")
-        guess = input("Your guess? ")
-
-print(f"Well done, {name}! You found my number in {count} tries!")
+play_game()
